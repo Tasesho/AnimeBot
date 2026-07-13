@@ -4,6 +4,8 @@ from typing import Any
 
 import aiohttp
 
+from models.anime import Anime
+
 _SEARCH_ANIME_QUERY = """
 query ($search: String!) {
   Media(search: $search, type: ANIME) {
@@ -63,12 +65,43 @@ class AniListClient:
             response.raise_for_status()
             return await response.json()
 
-    async def search_anime(self, title: str) -> dict[str, Any]:
+    def _parse_anime(self, media: dict[str, Any]) -> Anime:
+        """Convert an AniList Media object into an Anime model."""
+
+        titles = media.get("title", {})
+
+        title = (
+            titles.get("english")
+            or titles.get("romaji")
+            or titles.get("native")
+            or "Unknown"
+        )
+
+        cover = media.get("coverImage", {})
+
+        return Anime(
+            id=media["id"],
+            title=title,
+            status=media["status"],
+            episodes=media.get("episodes"),
+            season=media.get("season"),
+            season_year=media.get("seasonYear"),
+            cover_image=cover.get("large"),
+        )
+
+    async def search_anime(self, title: str) -> Anime | None:
         """Search an anime by title."""
 
-        return await self._request(
+        response = await self._request(
             query=_SEARCH_ANIME_QUERY,
             variables={
                 "search": title,
             },
         )
+
+        media = response.get("data", {}).get("Media")
+
+        if media is None:
+            return None
+
+        return self._parse_anime(media)
