@@ -23,21 +23,32 @@ class AnimeNotifyBot(commands.Bot):
         intents = discord.Intents.default()
 
         super().__init__(
-            command_prefix="!",
+            command_prefix=settings.command_prefix,
             intents=intents,
         )
 
         self.anilist = AniListClient()
 
     async def setup_hook(self) -> None:
-        """Initialize services before the bot starts."""
+        """Initialize services and load extensions."""
 
+        logger.info("Initializing AniList client...")
         await self.anilist.__aenter__()
+
+        logger.info("Loading extensions...")
 
         await self.load_extension("commands.anime")
 
+        logger.info("Syncing application commands...")
+
+        await self.tree.sync()
+
+        logger.info("Setup completed successfully.")
+
     async def close(self) -> None:
         """Cleanup resources before shutting down."""
+
+        logger.info("Closing AniList client...")
 
         await self.anilist.__aexit__(None, None, None)
 
@@ -58,6 +69,7 @@ async def on_ready() -> None:
 
 def main() -> None:
     logger.info("Starting Anime Notify...")
+
     bot.run(
         settings.discord_token,
         log_handler=None,
