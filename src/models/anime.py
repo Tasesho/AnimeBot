@@ -14,4 +14,3 @@ class Anime:
     season: str | None
     season_year: int | None
     cover_image: str | None
-    next_airing_episode: str | None
