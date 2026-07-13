@@ -134,7 +134,7 @@ New Episode?
 - [x] Repository initialization
 - [x] GitHub Actions
 - [x] Ruff integration
-- [ ] Discord bot bootstrap
+- [x] Discord bot bootstrap
 - [ ] AniList client
 - [ ] PostgreSQL integration
 
