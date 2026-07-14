@@ -70,12 +70,7 @@ class AniListClient:
 
         titles = media.get("title", {})
 
-        title = (
-            titles.get("english")
-            or titles.get("romaji")
-            or titles.get("native")
-            or "Unknown"
-        )
+        title = titles.get("english") or titles.get("romaji") or titles.get("native") or "Unknown"
 
         cover = media.get("coverImage", {})
 

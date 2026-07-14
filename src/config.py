@@ -24,16 +24,12 @@ class Settings:
 
         if environment not in VALID_ENVIRONMENTS:
             valid = ", ".join(sorted(VALID_ENVIRONMENTS))
-            raise ValueError(
-                f"APP_ENV must be one of: {valid}"
-            )
+            raise ValueError(f"APP_ENV must be one of: {valid}")
 
         discord_token = os.getenv("DISCORD_TOKEN", "")
 
         if require_token and not discord_token:
-            raise ValueError(
-                "DISCORD_TOKEN is not configured."
-            )
+            raise ValueError("DISCORD_TOKEN is not configured.")
 
         database_url = os.getenv(
             "DATABASE_URL",

@@ -40,9 +40,7 @@ class AnimeCog(commands.Cog):
         anime: Anime | None = await self.bot.anilist.search_anime(title)
 
         if anime is None:
-            await interaction.followup.send(
-                "Anime not found."
-            )
+            await interaction.followup.send("Anime not found.")
             return
 
         embed = discord.Embed(
