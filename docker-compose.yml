@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: anime_notify_postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: anime_notify
+      POSTGRES_USER: anime_notify
+      POSTGRES_PASSWORD: your_password_here
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
