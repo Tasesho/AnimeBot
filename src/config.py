@@ -13,6 +13,7 @@ class Settings:
     environment: str
     discord_token: str
     database_url: str
+    command_prefix: str
     log_level: str
 
     @classmethod
@@ -20,11 +21,13 @@ class Settings:
         load_dotenv()
 
         environment = os.getenv("APP_ENV", "development").lower()
+
         if environment not in VALID_ENVIRONMENTS:
             valid = ", ".join(sorted(VALID_ENVIRONMENTS))
             raise ValueError(f"APP_ENV must be one of: {valid}")
 
         discord_token = os.getenv("DISCORD_TOKEN", "")
+
         if require_token and not discord_token:
             raise ValueError("DISCORD_TOKEN is not configured.")
 
@@ -37,7 +40,14 @@ class Settings:
             environment=environment,
             discord_token=discord_token,
             database_url=database_url,
-            log_level=os.getenv("LOG_LEVEL", "INFO").upper(),
+            command_prefix=os.getenv(
+                "COMMAND_PREFIX",
+                "!",
+            ),
+            log_level=os.getenv(
+                "LOG_LEVEL",
+                "INFO",
+            ).upper(),
         )
 
 
