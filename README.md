@@ -135,7 +135,7 @@ New Episode?
 - [x] GitHub Actions
 - [x] Ruff integration
 - [x] Discord bot bootstrap
-- [ ] AniList client
+- [x] AniList client
 - [ ] PostgreSQL integration
 
 ### Version 0.5
