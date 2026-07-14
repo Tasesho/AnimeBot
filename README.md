@@ -5,6 +5,7 @@
 *A lightweight Discord bot that notifies you when new anime episodes are released.*
 
 [![CI](https://img.shields.io/github/actions/workflow/status/Tasesho/AnimeBot/ci.yml?label=CI&logo=githubactions)](#)
+[![Version](https://img.shields.io/badge/version-0.1.0-blue)](CHANGELOG.md)
 ![Python](https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white)
 ![discord.py](https://img.shields.io/badge/discord.py-2.x-5865F2?logo=discord&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?logo=postgresql&logoColor=white)
@@ -136,7 +137,7 @@ New Episode?
 - [x] Ruff integration
 - [x] Discord bot bootstrap
 - [x] AniList client
-- [ ] PostgreSQL integration
+- [x] Database Infraestructure
 
 ### Version 0.5
 
